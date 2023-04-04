@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  sports-league-ranking:
+    build: . 
+    ports: 
+      - 8000:8000
+    container_name: sports-league-ranking
+
+    volumes:
+      - django-media:/usr/src/app/static/media
+
+volumes:
+  django-media:
+    driver: local
