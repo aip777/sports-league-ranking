@@ -1,5 +1,5 @@
 # pull the official base image
-FROM python:3.10.0-alpine
+FROM python:3.10.2-slim-bullseye
 
 # set work directory
 WORKDIR /usr/src/app
@@ -11,8 +11,7 @@ ENV PYTHONUNBUFFERED 1
 # install dependencies
 RUN pip install --upgrade pip
 COPY ./plugins.txt /usr/src/app
-
-RUN pip install -r plugins.txt
+RUN pip install -r plugins.txt --use-deprecated=legacy-resolver
 # copy project
 COPY . /usr/src/app
 
