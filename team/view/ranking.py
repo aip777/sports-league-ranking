@@ -16,7 +16,28 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 
 from utils.ranking_generator import ranking_generator
+from django.views.generic.list import ListView
+from django.views.generic.edit import UpdateView
 
+class TeamRankingView(ListView):
+    model = TeamRanking
+    template_name = 'ranking/ranking-list.html'
+    def get_queryset(self, *args, **kwargs):
+        qs = super(TeamRankingView, self).get_queryset(*args, **kwargs)
+        qs = qs.order_by("-id")
+        return qs
+
+
+class TeamRankingUpdateView(UpdateView):
+    model = TeamRanking
+    template_name = 'ranking/update-ranking.html'
+    fields = [
+        "first_team",
+        "first_team_score",
+        "second_team",
+        "second_team_score",
+    ]
+    success_url = "/ranking-list"
 
 @login_required()
 def addRankingView(request):
@@ -28,7 +49,7 @@ def addRankingView(request):
             form_data.last_updated_by = request.user
             form_data.save()
             messages.success(request, "Successfully added")
-            return redirect("/")
+            return redirect("/ranking-list")
         else:
             messages.error(request, form.errors)
             return HttpResponseRedirect("#")
@@ -60,7 +81,7 @@ def updateRankingView(request, id):
             form.last_updated_by = request.user
             form.save()
             messages.success(request, "Successfully updated")
-            return redirect("/")
+            return redirect("/ranking-list")
         else:
             messages.error(request, form.errors)
             return HttpResponseRedirect("#")
@@ -77,9 +98,9 @@ def deleteRakingView(request, id):
     ranking = get_object_or_404(TeamRanking, id=id)
     ranking.delete()
     messages.success(request, "Successfully deleted")
-    return redirect("/")
+    return redirect("/ranking-list")
 
-
+@login_required()
 def csv_upload(request):
     if "GET" == request.method:
         ranking =ranking_generator()

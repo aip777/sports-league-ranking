@@ -47,17 +47,18 @@
         <div class="col-md-12 col-lg-12">
             <div class="card">
                 <div class="card-header py-2">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h6 class="fs-17 font-weight-600 mb-0">Add Ranking</h6>
-                        </div>
-                        <div class="text-right">
-                            <a href="{% url 'ranking-list' %}"
-                               class="btn btn-success btn-sm mr-1"><i class="fas fa-align-justify mr-1"></i>Ranking
-                                List</a>
-                        </div>
+                <div class="d-flex align-items-center">
+                    <div class="text-right">
+                        <a href="{% url 'upload_csv_file' %}"
+                           class="btn btn-success btn-sm mr-1"><i class="fas fa-plus mr-1"></i>CSV Upload</a>
+                    </div>
+
+                    <div class="text-right">
+                        <a href="{% url 'ranking-list' %}"
+                           class="btn btn-success btn-sm mr-1"><i class="fas fa-plus mr-1"></i>Ranking List</a>
                     </div>
                 </div>
+            </div>
                 <div class="card-body">
 
                     {% if form.errors %}
