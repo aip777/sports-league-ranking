@@ -9,6 +9,7 @@ coreschema==0.0.4
 cryptography==40.0.1
 defusedxml==0.7.1
 Django==3.2
+django-cors-headers==3.14.0
 django-crequest==2018.5.11
 django-extensions==3.2.1
 django-jazzmin==2.6.0
@@ -47,4 +48,3 @@ tomli==2.0.1
 tzlocal==3.0
 uritemplate==4.1.1
 urllib3==1.26.15
-corsheaders
