@@ -22,15 +22,19 @@ class ListViewTest(TestCase):
                 second_team_score=int(list(_result.values())[1])
             )
 
-    def test_url_exists(self):
-        response = self.client.get("ranking-list")
+    def test_ranking_list_url_exists(self):
+        url = reverse('ranking-list')
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
 
-    def test_url_accessible_by_name(self):
-        response = self.client.get(reverse('ranking-list'))
-        self.assertEqual(response.status_code, 200)
-
-    def test_view_uses_correct_template(self):
-        response = self.client.get(reverse('ranking-list'))
+    def test_ranking_list_view_template(self):
+        url = reverse('ranking-list')
+        response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'ranking/ranking-list.html')
+
+    def test_credentials(self):
+
+        url_login = reverse('login')
+        response = self.client.post(url_login, {'email': 'admin@admin.com', 'password': 'admin123123'})
+        self.assertEqual(response.status_code, 200)
