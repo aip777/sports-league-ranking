@@ -5,6 +5,7 @@ from crequest.middleware import CrequestMiddleware
 from django.contrib.auth.models import User
 from django.db import models, transaction
 
+from accounts.models import CustomUserModel
 from utils.clock import Clock
 
 
@@ -16,13 +17,13 @@ class BaseModel(models.Model):
     is_deleted = models.BooleanField(default=False, editable=False)
     is_locked = models.BooleanField(default=False, editable=False)
     created_by = models.ForeignKey(
-        User,
+        CustomUserModel,
         related_name="+",
         null=True,
         on_delete=models.SET_NULL,
     )
     last_updated_by = models.ForeignKey(
-        User,
+        CustomUserModel,
         related_name="+",
         null=True,
         on_delete=models.SET_NULL,
