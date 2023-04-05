@@ -15,23 +15,32 @@
     python manage.py migrate
     python manage.py runserver
 
-### Login credentials
-
-    http://127.0.0.1:8000/
-    
-    username: admin
-    password: admin123123
-
-
 ### Docker
 
     docker build -t sport-league .
     docker run -it -p 8080:8000 -e DJANGO_SUPERUSER_USERNAME=admin  -e DJANGO_SUPERUSER_PASSWORD=admin123123  -e DJANGO_SUPERUSER_EMAIL=admin@admin.com  sport-league
 
+### Django Admin 
+    http://127.0.0.1:8000/admin
+    email: admin@admin.com
+    password: admin123123
+    
+    Ranking List View
+    http://127.0.0.1:8000/team/
+    
+    Sample CSV Data
+    http://127.0.0.1:8000/static/sample.csv
+
+    List View
+    http://127.0.0.1:8000/team/ranking-list/
+
+    Ranking Add View
+    http://127.0.0.1:8000/team/add-ranking/
+    
 
 ### Login and Registration API
-    Login:
 
+    Login:
     http://127.0.0.1:8000/account/login-api/
 
     POST request: 
@@ -49,3 +58,6 @@
         "email":"emarn6@admin.com",
         "password":"admin123"
         }
+    
+    Token Login:
+    http://127.0.0.1:8000/auth/token/login
