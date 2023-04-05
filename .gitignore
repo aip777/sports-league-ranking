@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
 # C extensions
 *.so
 
@@ -59,7 +62,6 @@ docs/_build/
 # PyBuilder
 target/
 
-#blackwidow ignore
 *.pyc
 migrations
 .idea
