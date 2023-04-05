@@ -1,0 +1,40 @@
+{% extends 'base/base_internal.html' %}
+{% load static %}
+ 
+{% block content %}
+<div class="d-flex align-items-center justify-content-center text-center h-100vh">
+    <div class="form-wrapper m-auto">
+        <div class="form-container my-4">
+        
+            <div class="panel">
+                <div class="panel-header text-center mb-3">
+                    <h3 class="fs-24">Sports League Ranking</h3>
+                    <p class="text-muted text-center mb-0">Welcome to Admin Panel</p>
+                </div>
+                <form class="register-form" method="POST">
+                    {% csrf_token %}
+                    <div class="text-danger"><b>{{ form.non_field_errors }}</b></div>
+                    <div class="text-danger"><b> {{ form.field_errors }} </b></div>
+                    {% for message in messages %}
+                    <div class="text-danger"><b>{{message}}</b></div>
+                    {% endfor %}
+
+
+                    <div class="mb-3">
+                        {{ form.email }}
+                        <div class="invalid-feedback text-start">Enter your username</div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form.password }}
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success w-100">Sign in</button>
+                    <a href="{% url 'add-user' %}">Sing Up</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
