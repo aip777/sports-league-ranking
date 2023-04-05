@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     "djoser",
     "widget_tweaks",
     "accounts",
+    "corsheaders",
 ]
 AUTH_USER_MODEL = 'accounts.CustomUserModel'
 INSTALLED_APPS += APPS
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -55,6 +57,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "sport.urls"
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = [
+"http://localhost:8080",
+"http://127.0.0.1:8000",
+"http://127.0.0.1:8002"
+]
 
 TEMPLATES = [
     {
