@@ -47,4 +47,4 @@ def register_view(request):
 def logout_view(request):
     """ User Log out """
     logout(request)
-    return redirect('login')
+    return redirect('')

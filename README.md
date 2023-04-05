@@ -58,6 +58,3 @@
         "email":"emarn6@admin.com",
         "password":"admin123"
         }
-    
-    Token Login:
-    http://127.0.0.1:8000/auth/token/login

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -19,8 +20,9 @@ from utils.ranking_generator import ranking_generator
 from django.views.generic.list import ListView
 from django.views.generic.edit import UpdateView
 
-class TeamRankingView(ListView):
+class TeamRankingView(LoginRequiredMixin,ListView):
     model = TeamRanking
+    login_url = '/'
     template_name = 'ranking/ranking-list.html'
     def get_queryset(self, *args, **kwargs):
         qs = super(TeamRankingView, self).get_queryset(*args, **kwargs)
@@ -28,8 +30,9 @@ class TeamRankingView(ListView):
         return qs
 
 
-class TeamRankingUpdateView(UpdateView):
+class TeamRankingUpdateView(LoginRequiredMixin, UpdateView):
     model = TeamRanking
+    login_url = '/'
     template_name = 'ranking/update-ranking.html'
     fields = [
         "first_team",
@@ -39,7 +42,7 @@ class TeamRankingUpdateView(UpdateView):
     ]
     success_url = "/ranking-list"
 
-@login_required()
+@login_required(login_url='/')
 def addRankingView(request):
     if request.method == "POST":
         form = RankingForm(request.POST, request.FILES)
@@ -62,7 +65,7 @@ def addRankingView(request):
     return render(request, "ranking/add-ranking.html", context)
 
 
-@login_required()
+@login_required(login_url='/')
 def rankinglistView(request):
     ranking = TeamRanking.objects.all()
     context = {
@@ -71,7 +74,7 @@ def rankinglistView(request):
     return render(request, "ranking/ranking-list.html", context)
 
 
-@login_required()
+@login_required(login_url='/')
 def updateRankingView(request, id):
     rank = get_object_or_404(TeamRanking, id=id)
     if request.method == "POST":
@@ -93,14 +96,14 @@ def updateRankingView(request, id):
     return render(request, "ranking/update-ranking.html", context)
 
 
-@login_required()
+@login_required(login_url='/')
 def deleteRakingView(request, id):
     ranking = get_object_or_404(TeamRanking, id=id)
     ranking.delete()
     messages.success(request, "Successfully deleted")
     return redirect("/ranking-list")
 
-@login_required()
+@login_required(login_url='/')
 def csv_upload(request):
     if "GET" == request.method:
         ranking =ranking_generator()
