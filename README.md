@@ -46,7 +46,7 @@
     POST request: 
         {
         "email":"admin@admin.com",
-        "password":"admin"
+        "password":"admin123123"
         }
     
     Registration:
